@@ -1,10 +1,14 @@
-# PoshVenv - A PowerShell native Pyhon Virtual Environment Manager
+# PoshVenv - A PowerShell native Python Virtual Environment Manager
 
 PoshVenv is a Powershell native implementation to manage Pythin Virtual Environments.
 
 ## Installation
 
 Just clone the repository and make the `PoshVenv.ps1` available in your PATH.
+For example, you can create a symlink to the script in a folder that is in your PATH.
+```powershell
+New-Item <yourPath/Poshvenv.ps1> -ItemType SymbolicLink -Value <pathToPoshVenvRepo/PoshVenv.ps1>
+```
 
 To enable automatic venv activation, also add the following line to your Powershell profile:
 
