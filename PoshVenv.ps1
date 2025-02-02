@@ -1,5 +1,5 @@
-$script:POSHVENV_HOME="${env:USERPROFILE}\.poshvenv"
-$script:PYTHON_BIN="python"
+$script:POSHVENV_HOME=$null
+$script:PYTHON_BIN=$null
 
 function Handle-Parameters()
 {
@@ -18,7 +18,7 @@ function Handle-Parameters()
         $script:POSHPOSHVENV_HOME = $value
         Write-Debug "Setting POSHVENV_HOME to $value"
       }
-      '--python-bin'
+      '-p|--python'
       {
         $value , $params = $params
         $script:PYTHON_BIN = $value
@@ -29,6 +29,34 @@ function Handle-Parameters()
         $script:arguments.Add($param)
         Write-Debug "Adding Default Argument"
       }
+    }
+  }
+}
+
+function Handle-DefaultValues()
+{
+  if ($script:POSHVENV_HOME -eq $null)
+  {
+    if ($env:POSHVENV_HOME)
+    {
+      $script:POSHVENV_HOME = $env:POSHVENV_HOME
+      Write-Debug "Setting POSHVENV_HOME to $script:POSHVENV_HOME"
+    } else
+    {
+      $script:POSHVENV_HOME = "${env:USERPROFILE}\.poshvenv"
+      Write-Debug "Setting POSHVENV_HOME to $script:POSHVENV_HOME"
+    }
+  }
+  if ($script:PYTHON_BIN -eq $null)
+  {
+    if ($env:POSHVENV_PYTHON_BIN)
+    {
+      $script:PYTHON_BIN = $env:POSHVENV_PYTHON_BIN
+      Write-Debug "Setting PYTHON_BIN to $script:PYTHON_BIN"
+    } else
+    {
+      $script:PYTHON_BIN = "python"
+      Write-Debug "Setting PYTHON_BIN to $script:PYTHON_BIN"
     }
   }
 }
@@ -152,6 +180,7 @@ if ($argsArray -AND $argsArray.Contains("-Debug"))
 }
 
 Handle-Parameters $argsArray
+Handle-DefaultValues
 
 Check-Requirements
 

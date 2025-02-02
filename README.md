@@ -54,3 +54,19 @@ Once you change your directory into the folder, the venv will be activated autom
 Leaving the folder will deactivate the venv.
 
 Search happens recursively from the current directory to the root of the drive.
+
+## Configuration
+
+You can configure `PoshVenv` with command line parameters for each call or environment variables globally. Parameters take precedence over environment variables.
+
+### PoshVenv Home
+
+The home path where virtual environments are stored. Defaults to `$env:USERPROFILE/.poshvenv`.
+
+You can set `$env:POSHVENV_HOME` or pass the `-h|--home` parameter to configurre the home path.
+
+### Python Binary
+
+The python binary to use. Default to `python`.
+
+You can set `$env:POSHVENV_PYTHON_BIN` or pass the `-p|--python` parameter to configure the python binary.
